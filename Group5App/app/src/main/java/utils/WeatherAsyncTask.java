@@ -11,64 +11,60 @@ import android.widget.TextView;
 import com.example.group5.weatherprediction.R;
 import android.location.Geocoder;
 import android.location.Address;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import com.example.group5.weatherprediction.WeatherByAddressActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
 import models.OpenWeatherJSon;
 
 public class WeatherAsyncTask extends AsyncTask<Void, Void, OpenWeatherJSon> {
-    ProgressDialog dialog;
-    Activity activity;
-    TypePrediction typePrediction;
-    String q;
-    double latitude;
-    double longitude;
-    NumberFormat format = new DecimalFormat("#0.0");
-    Bitmap myBitmap=null;
+    private ProgressDialog dialog;
+    private Activity activity;
+    private TypePrediction typePrediction;
+    private String q;
+    private double latitude;
+    private double longitude;
+    private NumberFormat format = new DecimalFormat("#0.0");
+    private Bitmap myBitmap=null;
+    private String location;
 
-    Marker marker=null;
-    GoogleMap map=null;
+    private Marker marker = null;
+    private GoogleMap map = null;
 
-
-    public WeatherAsyncTask(Activity activity,String q)
-    {
-        this.activity=activity;
-        this.typePrediction=TypePrediction.ADDRESS_NAME;
-        this.q=q;
-        this.dialog=new ProgressDialog(activity);
-        this.dialog.setTitle("Đang tải thông tin ...");
-        this.dialog.setMessage("Vui lòng chờ...");
-        this.dialog.setCancelable(true);
-    }
 
     public WeatherAsyncTask(Activity activity,double latitude,double longitude)
     {
-        this.activity=activity;
-        this.typePrediction=TypePrediction.LATITUDE_LONGITUDE;
-        this.latitude=latitude;
-        this.longitude=longitude;
-        this.dialog=new ProgressDialog(activity);
-        this.dialog.setTitle("Đang tải thông tin ...");
-        this.dialog.setMessage("Vui lòng chờ...");
+        this.activity = activity;
+        this.typePrediction = TypePrediction.LATITUDE_LONGITUDE;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.dialog = new ProgressDialog(activity);
+        this.dialog.setTitle("Loading ...");
+        this.dialog.setMessage("Please wait!");
+        this.dialog.setCancelable(true);
+    }
+
+    public WeatherAsyncTask(Activity activity,double latitude,double longitude, String location)
+    {
+        this.activity = activity;
+        this.typePrediction = TypePrediction.LATITUDE_LONGITUDE;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.location = location;
+        this.dialog = new ProgressDialog(activity);
+        this.dialog.setTitle("Loading ...");
+        this.dialog.setMessage("Please wait!");
         this.dialog.setCancelable(true);
     }
 
@@ -101,14 +97,9 @@ public class WeatherAsyncTask extends AsyncTask<Void, Void, OpenWeatherJSon> {
             connection.connect();
 
             InputStream input = connection.getInputStream();
-            //Tiến hành convert qua hình ảnh
             myBitmap = BitmapFactory.decodeStream(input);
         } catch (Exception e) {
-            //e.printStackTrace();
-            Writer writer = new StringWriter();
-            e.printStackTrace(new PrintWriter(writer));
-            String s = writer.toString();
-            dialog.setMessage(s);
+            e.printStackTrace();
         }
         return openWeatherJSon;
     }
@@ -155,8 +146,6 @@ public class WeatherAsyncTask extends AsyncTask<Void, Void, OpenWeatherJSon> {
         timeSunrise.setTime(new Date(openWeatherJSon.getSys().getSunrise()*1000));
         String Sunrise= timeSunrise.get(Calendar.HOUR)+":"+timeSunrise.get(Calendar.MINUTE)+" AM";
 
-
-        //Date timeSunSet = new Date(openWeatherJSon.getSys().getSunset()*1000);
         Calendar timeSunSet = Calendar.getInstance();
         timeSunSet.setTime(new Date(openWeatherJSon.getSys().getSunset()*1000));
         String sunset= timeSunSet.get(Calendar.HOUR)+":"+timeSunSet.get(Calendar.MINUTE);
@@ -187,15 +176,12 @@ public class WeatherAsyncTask extends AsyncTask<Void, Void, OpenWeatherJSon> {
                 address=addresses.get(0);
             if(address!=null)
             {
-                if(typePrediction==TypePrediction.LATITUDE_LONGITUDE)
-                    txtCurrentAddressName.setText(address.getAddressLine(0));
-                else
-                    txtCurrentAddressName.setText(q);
-                /*String city = address.getLocality();
-                String state = address.getAdminArea();
-                String country = address.getCountryName();
-                String postalCode = address.getPostalCode();
-                String knownName = address.getFeatureName();*/
+                if(location != null){
+                    txtCurrentAddressName.setText(location);
+                }else{
+                    if(typePrediction==TypePrediction.LATITUDE_LONGITUDE)
+                        txtCurrentAddressName.setText(address.getAddressLine(0));
+                }
             }
 
         } catch (IOException e) {
