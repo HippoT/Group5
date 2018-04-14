@@ -152,4 +152,5 @@
         <item>Yen Bai</item>
 
     </string-array>
+    <string name="title_activity_auto_complete_place">Select your location</string>
 </resources>

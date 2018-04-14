@@ -69,12 +69,11 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Please check your connection", Toast.LENGTH_LONG).show();
             return;
         }
-        Intent iWeatherByAddress = new Intent(MainActivity.this, SelectCityActivity.class);
+        Intent iWeatherByAddress = new Intent(MainActivity.this, AutoCompletePlaceActivity.class);
         startActivity(iWeatherByAddress);
     }
 
     public void onClkDisplayPredictWeather(View view) {
-
     }
 
     public void onClkShowMap(View view) {
