@@ -25,17 +25,18 @@ import models.OpenWeatherJSon;
 
 public class MyInfoWindowAdapter implements InfoWindowAdapter {
     private Activity context;
-    Marker maker=null;
-    OpenWeatherJSon openWeatherJSon=null;
-    Bitmap myBitmap=null;
-    NumberFormat format = new DecimalFormat("#0.0");
-    double latitude;
-    double longitude;
+    private Marker maker=null;
+    private OpenWeatherJSon openWeatherJSon=null;
+    private Bitmap myBitmap=null;
+    private NumberFormat format = new DecimalFormat("#0.0");
+    private double latitude;
+    private double longitude;
 
     public MyInfoWindowAdapter(Activity context)
     {
         this.context=context;
     }
+
     public MyInfoWindowAdapter(OpenWeatherJSon openWeatherJSon,Bitmap myBitmap,Marker maker,Activity context)
     {
         this(context);
@@ -43,6 +44,7 @@ public class MyInfoWindowAdapter implements InfoWindowAdapter {
         this.openWeatherJSon=openWeatherJSon;
         this.myBitmap=myBitmap;
     }
+
     public MyInfoWindowAdapter(OpenWeatherJSon openWeatherJSon,Bitmap myBitmap,Marker maker,Activity context,double latitude,double longitude)
     {
         this(openWeatherJSon,myBitmap,maker,context);
@@ -70,20 +72,15 @@ public class MyInfoWindowAdapter implements InfoWindowAdapter {
         String mintemp= format.format(openWeatherJSon.getMain().getTemp_min()-273.15)+"°C";
         String wind= openWeatherJSon.getWind().getSpeed()+" m/s";
         String mesg = openWeatherJSon.getWeather().get(0).getMain();
-        //  Translator translate = Translator.getInstance();
-        // String cloudiness=mesg+" ("+translate.translate(mesg, Language.ENGLISH, Language.VIETNAMESE)+")";
+
         String cloudiness=mesg;
         String pressure= openWeatherJSon.getMain().getPressure()+" hpa";
         String humidity=openWeatherJSon.getMain().getHumidity()+" %";
 
-        //Date timeSunrise = new Date(openWeatherJSon.getSys().getSunrise()*1000);
-        //String Sunrise= timeSunrise.getHours()+":"+timeSunrise.getMinutes()+" AM";
         Calendar timeSunrise = Calendar.getInstance();
         timeSunrise.setTime(new Date(openWeatherJSon.getSys().getSunrise()*1000));
         String Sunrise= timeSunrise.get(Calendar.HOUR)+":"+timeSunrise.get(Calendar.MINUTE)+" AM";
 
-        //Date timeSunSet = new Date(openWeatherJSon.getSys().getSunset()*1000);
-        //String sunset= timeSunSet.getHours()+":"+timeSunSet.getMinutes();
         Calendar timeSunSet = Calendar.getInstance();
         timeSunSet.setTime(new Date(openWeatherJSon.getSys().getSunset()*1000));
         String sunset= timeSunSet.get(Calendar.HOUR)+":"+timeSunSet.get(Calendar.MINUTE);
@@ -104,7 +101,7 @@ public class MyInfoWindowAdapter implements InfoWindowAdapter {
             Geocoder geocoder;
             List<Address> addresses;
             geocoder = new Geocoder(this.context, Locale.getDefault());
-            addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            addresses = geocoder.getFromLocation(latitude, longitude, 1);
 
             Address address=null;
             if(addresses.size()>0)
@@ -112,11 +109,6 @@ public class MyInfoWindowAdapter implements InfoWindowAdapter {
             if(address!=null)
             {
                 txtCurrentAddressName.setText(address.getAddressLine(0));
-                /*String city = address.getLocality();
-                String state = address.getAdminArea();
-                String country = address.getCountryName();
-                String postalCode = address.getPostalCode();
-                String knownName = address.getFeatureName();*/
             }
 
         } catch (IOException e) {

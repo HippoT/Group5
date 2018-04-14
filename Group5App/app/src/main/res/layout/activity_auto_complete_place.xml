@@ -1,80 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".WeatherByAddressActivity">
-    <TextView
-        android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AutoCompletePlaceActivity">
+    <fragment
+        android:id="@+id/frame-autocomplete"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Địa chỉ:"
-        android:id="@+id/textView11" />
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/txtCurrentAddressName"
-        android:hint="Địa chỉ hiện tại"
+        android:hint="Your location"
+        android:textSize="30dp"
         android:gravity="center"
-        android:textColor="#ff1919ff" />
+        android:textColor="@color/colorTextPrimary" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView12"
-        android:background="#ff06ff22"
-        android:height="1dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nhiệt độ:"
-        android:id="@+id/textView9" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/txtTemperature"
-        android:hint="nhiệt độ ở đây"
-        android:gravity="center"
-        android:textColor="#ffff2d34" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Bầu trời:"
-        android:id="@+id/textView15" />
+        android:background="#fff"
+        android:height="4dp" />
 
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:id="@+id/imgBauTroi"
         android:layout_gravity="center" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/txtTemperature"
+        android:hint="Loading..."
+        android:gravity="center"
+        android:textSize="45dp"
+        android:textColor="@color/colorTextPrimary" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/textView16"
-        android:background="#ff06ff22"
-        android:height="1dp" />
+        android:background="#fff"
+        android:height="4dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chi tiết"
+        android:text="DETAIL"
+        android:textSize="30dp"
+        android:layout_margin="10dp"
         android:id="@+id/textView17"
+        android:textColor="@color/colorTextPrimary"
+        android:textStyle="bold"
         android:layout_gravity="center" />
 
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:id="@+id/scrollView" >
 
         <TableLayout
@@ -89,8 +83,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Max Temp:"
+                    android:textColor="@color/colorTextPrimary"
                     android:id="@+id/textView18" />
 
                 <TextView
@@ -98,7 +93,9 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/txtMaxTemp"
-                    android:hint="Nhiệt độ lớn nhất ở đây" />
+                    android:textColor="@color/colorTextPrimary"
+                    android:layout_marginLeft="10dp"
+                    android:hint="Loading..." />
             </TableRow>
 
             <TableRow
@@ -108,8 +105,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Min Temp:"
+                    android:textColor="@color/colorTextPrimary"
                     android:id="@+id/textView20" />
 
                 <TextView
@@ -117,7 +115,9 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/txtMinTemp"
-                    android:hint="Nhiệt độ nhỏ nhất ở đây" />
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:hint="Loading..." />
             </TableRow>
 
             <TableRow
@@ -127,8 +127,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Wind:"
+                    android:textColor="@color/colorTextPrimary"
                     android:id="@+id/textView21" />
 
                 <TextView
@@ -136,7 +137,9 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/txtWind"
-                    android:hint="Tố độ gió ở đây" />
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:hint="Loading..." />
             </TableRow>
 
             <TableRow
@@ -146,8 +149,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Cloudiness:"
+                    android:textColor="@color/colorTextPrimary"
                     android:id="@+id/textView22" />
 
                 <TextView
@@ -155,7 +159,9 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/txtCloudliness"
-                    android:hint="Hướng mây" />
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:hint="Loading..." />
             </TableRow>
 
             <TableRow
@@ -165,8 +171,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Pressure:"
+                    android:textColor="@color/colorTextPrimary"
                     android:id="@+id/textView23" />
 
                 <TextView
@@ -174,7 +181,9 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/txtPressure"
-                    android:hint="Áp suất ở đây" />
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:hint="Loading..." />
             </TableRow>
 
             <TableRow
@@ -184,8 +193,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Humidity:"
+                    android:textColor="@color/colorTextPrimary"
                     android:id="@+id/textView24" />
 
                 <TextView
@@ -193,7 +203,9 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/txtHumidty"
-                    android:hint="độ ẩm ở đây" />
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:hint="Loading..." />
             </TableRow>
 
             <TableRow
@@ -203,8 +215,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Sunrise:"
+                    android:textColor="@color/colorTextPrimary"
                     android:id="@+id/textView25" />
 
                 <TextView
@@ -212,7 +225,9 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/txtSunrise"
-                    android:hint="Mặt trời mọc" />
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:hint="Loading..." />
             </TableRow>
 
             <TableRow
@@ -222,8 +237,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Sunset:"
+                    android:textColor="@color/colorTextPrimary"
                     android:id="@+id/textView26" />
 
                 <TextView
@@ -231,7 +247,9 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/txtSunset"
-                    android:hint="Mặt trời mọc" />
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/colorTextPrimary"
+                    android:hint="Loading..." />
             </TableRow>
         </TableLayout>
     </ScrollView>

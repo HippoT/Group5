@@ -84,42 +84,10 @@
                 android:id="@+id/textView2"
                 android:layout_gravity="center_vertical"
                 android:gravity="fill_vertical"
-                android:text="The weather weather at the location you enter" />
+                android:text="The weather at the location you enter" />
 
         </TableRow>
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
 
-
-            <TextView
-                android:layout_span="2"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:text=""
-                android:id="@+id/textView6"
-                android:background="#004040" />
-        </TableRow>
-        <TableRow
-            android:onClick="onClkDisplayPredictWeather"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <ImageButton
-                android:onClick="onClkDisplayPredictWeather"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton3"
-                android:src="@drawable/weatherpredict" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView3"
-                android:layout_gravity="center_vertical"
-                android:gravity="fill_vertical"
-                android:text="Predict the weather at your location" />
-        </TableRow>
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
